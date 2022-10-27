@@ -1,11 +1,60 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const FadeAppTest());
+  runApp(const MaterialApp(home: MyHomePage()));
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.yellowAccent,
+      appBar: AppBar(title: const Text("my App UI"), actions: <Widget>[
+        IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart)),
+        IconButton(onPressed: () {}, icon: const Icon(Icons.monetization_on)),
+      ]),
+      body: Container(
+        color: Colors.red,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text("Drawer Header"),
+            ),
+            ListTile(
+              title: const Text("test item1"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text("test item2"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text("test item3"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class FadeAppTest extends StatelessWidget {
   const FadeAppTest({super.key});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -23,6 +72,7 @@ class MyFadeTest extends StatefulWidget {
   const MyFadeTest({super.key, required this.title});
 
   final String title;
+
   @override
   State<MyFadeTest> createState() => _MyFadeTest();
 }
