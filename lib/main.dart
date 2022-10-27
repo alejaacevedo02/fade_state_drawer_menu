@@ -1,55 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MaterialApp(home: MyHomePage()));
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.yellowAccent,
-      appBar: AppBar(title: const Text("my App UI"), actions: <Widget>[
-        IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart)),
-        IconButton(onPressed: () {}, icon: const Icon(Icons.monetization_on)),
-      ]),
-      body: Container(
-        color: Colors.red,
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text("Drawer Header"),
-            ),
-            ListTile(
-              title: const Text("test item1"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text("test item2"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text("test item3"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  runApp(const MaterialApp(home: FadeAppTest()));
 }
 
 class FadeAppTest extends StatelessWidget {
@@ -63,7 +15,7 @@ class FadeAppTest extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyFadeTest(title: 'Fade Demo'),
+      home: const MyFadeTest(title:"Drawer and animation App"),
     );
   }
 }
@@ -97,8 +49,39 @@ class _MyFadeTest extends State<MyFadeTest> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      appBar: AppBar(title: const Text("my App UI"), actions: <Widget>[
+        IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart)),
+        IconButton(onPressed: () {}, icon: const Icon(Icons.monetization_on)),
+      ]),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text("Drawer Header"),
+            ),
+            ListTile(
+              title: const Text("test item1"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text("test item2"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text("test item3"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
       ),
       body: Center(
         child: FadeTransition(

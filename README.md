@@ -4,5 +4,5 @@ A new Flutter project.
 
 ## Getting Started
 
-Show how to do an animation with Fade_test_app
-Show how to implement the drawer menu with MyHomePage
+Show how to do an animation with Fade_test_app floatingActionButton and how to implement the drawer
+menu.
