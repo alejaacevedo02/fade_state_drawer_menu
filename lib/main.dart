@@ -1,6 +1,28 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-void main() {
+import 'package:fade_state_demo/presentation/loyalty/loyalty_list_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'data/hive/loyalty_card_box.dart';
+import 'data/loyalty_card/model/loyalty_card.dart';
+import 'data/loyalty_card/repository/loyalty_card_repository.dart';
+import 'domain/loyalty/loyalty_bloc.dart';
+
+Future<void> _initialiseHive() async {
+  final Directory appDocDirectory = await getApplicationDocumentsDirectory();
+  final path = appDocDirectory.path;
+  Hive
+    ..init(path)
+    ..registerAdapter(LoyaltyCardAdapter());
+}
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await _initialiseHive();
+
   runApp(const MaterialApp(home: FadeAppTest()));
 }
 
@@ -11,23 +33,28 @@ class FadeAppTest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fade Demo',
+      title: 'Loyalty App Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyFadeTest(title:"Drawer and animation App"),
+      home: BlocProvider<LoyaltyBloc>(
+        create: (BuildContext context) => LoyaltyBloc(
+            loyaltyCardRepository: LoyaltyCardRepository(LoyaltyCardBox())),
+        child: const LoyaltyListPage(),
+      ),
     );
   }
 }
 
-class MyFadeTest extends StatefulWidget {
+  class MyFadeTest extends StatefulWidget {
   const MyFadeTest({super.key, required this.title});
 
   final String title;
 
   @override
   State<MyFadeTest> createState() => _MyFadeTest();
-}
+  }
+
 
 class _MyFadeTest extends State<MyFadeTest> with TickerProviderStateMixin {
   late AnimationController controller;
